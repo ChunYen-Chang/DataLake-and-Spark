@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="530" height="270" src="https://upload.cc/i1/2019/09/02/4c7tEm.jpg">
+</p>
+
 # Data lake for Sparkify (By using AWS S3)
 #### PROJECT BACKGROUND AND SUMMARY
 ###### *BACKGROUND*
