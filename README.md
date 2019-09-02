@@ -13,7 +13,10 @@ The analytics team in this company is interested in understanding their user act
 ###### *DETAILS AND DATA MODELING*
 In this project, it will create an ETL data pipeline. This data pipeline is based on Spark cluster, this Spark cluster extracts JSON data from AWS S3, transforms data into a format which fits the analytical team wants, and loads the result back into S3 in parquet format. The data modeling for this project is using dimensional model. There are five tables--one fact table and four dimensional tables. The fact table is songplay, it includes information about songplay history. The dimension tables are user, song, artist, and time. User table includes the user's personal information. Song table includes the song's information. Time table includes when a song is played. The structure can be seen in the below picture.
 
-![](https://upload.cc/i1/2019/07/30/K4u9Ee.jpg)
+<p align="center">
+  <img src="https://upload.cc/i1/2019/08/25/gM9qd6.jpg">
+</p>
+
 ------------
 #### FILES IN THE REPOSITORY
 1. **etl.py**: a python script which is used for launching a Spark Cluster, getting data from Sparkify data lake (AWS S3), transforming data into a format which Sparkify analytical team wants, and load the result back to S3
