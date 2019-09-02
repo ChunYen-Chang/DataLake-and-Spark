@@ -1,8 +1,8 @@
 <p align="center">
-  <img width="530" height="270" src="https://upload.cc/i1/2019/09/02/4c7tEm.jpg">
+  <img width="750" height="300" src="https://upload.cc/i1/2019/09/02/xE82LS.jpg">
 </p>
 
-# Data lake for Sparkify (By using AWS S3)
+# Data lake for Sparkify (By using Spark + AWS S3)
 #### PROJECT BACKGROUND AND SUMMARY
 ###### *BACKGROUND*
 Sparkify is a startup company which provides the music streaming app. Recently, this compaby has grown their business and needs an efficient way to store and organize its growing-up amount of data. It decides to move their data from its on-premise database to a cloude data lake solution--AWS S3. This data lake includes two kinds of data, "user activity on the app" and "songs data". Both of them are in json format.
