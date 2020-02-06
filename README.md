@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="750" height="300" src="https://upload.cc/i1/2019/09/02/xE82LS.jpg">
+  <img width="750" height="300" src="https://github.com/ChunYen-Chang/DataLake-and-Spark/blob/master/images/logo.jpg">
 </p>
 
 # Data lake for Sparkify (By using Spark + AWS S3)
@@ -14,7 +14,7 @@ The analytics team in this company is interested in understanding their user act
 In this project, it will create an ETL data pipeline. This data pipeline is based on Spark cluster, this Spark cluster extracts JSON data from AWS S3, transforms data into a format which fits the analytical team wants, and loads the result back into S3 in parquet format. The data modeling for this project is using dimensional model. There are five tables--one fact table and four dimensional tables. The fact table is songplay, it includes information about songplay history. The dimension tables are user, song, artist, and time. User table includes the user's personal information. Song table includes the song's information. Time table includes when a song is played. The structure can be seen in the below picture.
 
 <p align="center">
-  <img src="https://upload.cc/i1/2019/08/25/gM9qd6.jpg">
+  <img src="https://github.com/ChunYen-Chang/DataLake-and-Spark/blob/master/images/data_modeling.jpg">
 </p>
 
 ------------
