@@ -2,7 +2,7 @@
   <img width="750" height="300" src="https://github.com/ChunYen-Chang/DataLake-and-Spark/blob/master/images/logo.jpg">
 </p>
 
-# Data lake for Sparkify (By using Spark + AWS S3)
+# Migrate local data storage and process to Cloud
 #### PROJECT BACKGROUND AND SUMMARY
 ###### *BACKGROUND*
 Sparkify is a startup company which provides the music streaming app. Recently, this compaby has grown their business and needs an efficient way to store and organize its growing-up amount of data. It decides to move their data from its on-premise data storage server to a cloud data lake solution--AWS S3. The data kept in the on-premise data storage server is in json format and the data relates to "user activity on the app" and "songs detailed information provided by Sparkify".
