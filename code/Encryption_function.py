@@ -8,7 +8,7 @@ class AWSEncryption():
 		"""
         Description: This function allows user to encrypt AWS KEY
         Parameters: key_content - AWS key information
-        Note: None
+        Return: None
 		"""
 		# ask user type password
 		password = getpass()
@@ -26,7 +26,7 @@ class AWSEncryption():
 		"""
         Description: This function allows user to decrypt the  encrypted AWS KEY
         Parameters: encrypt_content - encrypted AWS KEY
-        Note: None
+        Return: None
 		"""
 		# ask user type password
 		password = getpass()
