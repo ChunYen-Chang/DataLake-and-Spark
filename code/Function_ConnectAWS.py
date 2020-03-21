@@ -1,7 +1,7 @@
 # import necessary packages
 import boto3
 import os
-import Encryption_function
+import Function_Encryption
 
 
 class ConnectAWS():
@@ -13,7 +13,7 @@ class ConnectAWS():
         Return: session
         """
         # decrypt aws_key and aws_secret_key
-        Encryption_obj = Encryption_function.AWSEncryption()
+        Encryption_obj = Function_Encryption.AWSEncryption()
         aws_key = Encryption_obj.decrypt_AWSKEY(aws_key)
         aws_secret_key = Encryption_obj.decrypt_AWSKEY(aws_secret_key)
     

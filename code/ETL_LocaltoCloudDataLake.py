@@ -1,5 +1,5 @@
 # import necessary package
-import ConnectAWS_function
+import Function_ConnectAWS
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     AWSSecretKey = AWS_encrypted_secret_key
     
     # create an object
-    AWS_connection = ConnectAWS()
+    AWS_connection = Function_ConnectAWS.ConnectAWS()
     
     # connect to AWS
     asession = AWS_connection.create_session(AWSAccessKeyId, AWSSecretKey)
