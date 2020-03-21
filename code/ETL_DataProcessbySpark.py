@@ -54,7 +54,7 @@ def process_song_data(spark, input_data, output_data):
                     ])
     
     # read song data file
-    song_df = spark.read.json(song_data, , schema=SongSchema)
+    song_df = spark.read.json(song_data, schema=SongSchema)
     
     #--------------------deal with song table--------------------#
     # extract columns to create songinf df
@@ -193,7 +193,7 @@ def process_log_data(spark, input_data, output_data):
                     ])
     
     # read song data file
-    song_df = spark.read.json(song_data, , schema=SongSchema)
+    song_df = spark.read.json(song_data, schema=SongSchema)
         
     # filter by actions for song plays
     log_df_filter = log_df.where(log_df.page == 'NextSong')
