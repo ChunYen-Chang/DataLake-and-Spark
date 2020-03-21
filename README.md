@@ -5,36 +5,34 @@
 # Migrate local data storage and process to AWS Cloud
 #### PROJECT BACKGROUND AND SUMMARY
 ###### *BACKGROUND*
-A startup company which provides the music streaming app. Recently, this compaby has grown their business and needs an efficient way to store and organize its growing-up amount of data. It decides to move their data from its on-premise data storage server to a cloud data lake solution--AWS S3. The data kept in the on-premise data storage server is in json format and the data relates to "user activity on the app" and "songs detailed information provided by Sparkify".
+A startup company which provides the music streaming app recently has grown their business and needs an efficient way to store and organize its growing-up amount of data. It decides to move their data from its on-premise data storage and processing local server to a cloud data lake solution--AWS S3 and cloud data processing platform--AWS spark cluster. 
 
 ###### *PROJECT DESCRIPTION*
-The analytics team in this company is interested in understanding their user activity on its music streaming app in order to provide better user experience for their user. However, due to the huge amount of incoming streaming user data, it is impossible to store all data in a on-premise data storage server. Also, the great amount of incoming streaming data also make conducting the data wrangling process in an on-premise stand-alone serve impossible. To overcome first problems, we decide to move the on-premise single data storage server to a cloud data lake (AWS S3) for accommodating the data. For second problem, we choose to launch a Spark cluster on AWS EMR and use this Spark cluster to tackle the data processing bottleneck problem. In sum, in this project, there are two goals. The first one is **moving local data to cloud data lake.** The second one is **using AWS EMR to do the data wrangling task by extracting data from S3, processing the data using Spark, and dumping the data back into S3 in a column-based data format to achieve storage-efficient.** 
+This company has two different kind of data. The first one is the data about the user activity on the app. The second one is the data about the song the company provides. These two data are stored in JSON format. Now, the analytics team in this company is interested in understanding their user activity based on this two kinds of data in order to provide better APP user experience. However, due to the great amount of data, it is hard to store all data in a on-premise data storage server and impossible to conduct the data wrangling process in an on-local stand-alone serve. To tackle the storage capacity problem, we decide to use the cloud data lake (AWS S3) to replace the original on-premise single data storage server for accommodating the great amount of data. To deal with the data processing problem, we choose to launch a Spark cluster through AWS EMR and use this Spark cluster to consume the great amount of data and do the data processing tasks. Apart from this, we also store the after-processing data in PARQUET format to maxmize the storage efficient in cloud data lake. In sum, in this project, there are two goals. The first one is **moving local data to cloud data lake.** The second one is **using AWS EMR to do the data wrangling task by extracting data from S3, processing the data using Spark, and dumping the data back into S3 in a Parquet format to achieve storage-efficient.** 
 
-###### *SYSTEM ARCHITECTURE*
+#### SYSTEM ARCHITECTURE
 <p align="center">
   <img width="850" height="275" src="https://github.com/ChunYen-Chang/Migrate-Local-Data-Storage-and-Process-to-AWS-Cloud/blob/master/images/system_architecture.jpeg">
 </p>
 
-###### *DETAILS AND DATA MODELING*
-In this project, it will create a manually ETL data pipeline. This data pipeline is based on Spark cluster, this Spark cluster extracts JSON data from AWS S3, transforms data into a format which fits the analytical team wants, and loads the result back into S3 in parquet format. The data modeling for this project is using star schema model. There are five tables--one fact table and four dimensional tables. The fact table is songplay, it includes information about songplay history. The dimension tables are user, song, artist, and time. User table includes the user's personal information. Song table includes the song's information. Time table includes when a song is played. The structure can be seen in the below picture.
-
-
+The picture shows the whole system structure. The left side is about moveing data from local to cloud data lake,and, the right side is about using cloud Spark cluster to execute the data wrangling process. In this project, we use the AWS boto3 packages, which is a python toolbox developed by AWS for allowing python developers to interact woth AWS service through AWS RESTful APIs, to program all python codes. For example, there two code scripts. The first script allows us to create a directory in the cloud data lake, scan all files in one local directory and upload these files to this cloud data lake each by each. The second script allows us to start a cloud Spark cluster, extract data from a cloud data lake directory, put data in the Spark cluster for data processing, dump after-processing data back to another directory in the cloud data lake, and terminate the Spark cluster. 
+The benefits of using boto3 are two. First, user don't have to interact with AWS though AWS website dashboard. From our experience, when using AWS service though the AWS website dashboard, users are likely click wrong bottoms or forget to give some important system parameter and it usually cause unpredictable problems. By using boto3, we can build a standard process of launching and using these AWS service. The second benefit is we can execute the python code in an automatic way. If we want to execute the code automatically, we use crontab in Linux to trigger this code in a specific time. We just degine relating settings and let computers to finish all tasks. Engineers like to make something to make their life easier, is it :)
 
 ------------
 #### FILES IN THE REPOSITORY
-1. **etl.py**: a python script which is used for launching a Spark Cluster, getting data from Sparkify data lake (AWS S3), transforming data into a format which Sparkify analytical team wants, and load the result back to S3
+1. **README.md**: An introduction to this project
 
-2. **dl.cfg**: a configuration file which contains the necessary information of connecting to S3
+2. **image directory**: A directory for keeping images for this project
 
-3. **test_code.ipynb**: a jupyter notebook file which is written for developing the python code for etl.py. If you want to do some further modifications, please run the command in this file first and put some other codes you want.
+3. **code directory**: A directory for keeping all python scripts
+    - **Function_ConnectAWS.py**: contain the self-defined funcions for connecting to AWS service
+    - **Function_Encryption.py**: contain the self-defined funcions for encrypt and decrypt the AWS key and secret key
+    - **Function_SSH.py**: contain the self-defined funcions for connection to AWS Spark master node by SSH
+    - **ETL_DataProcessbySpark.py**: the python script for Spark submit command
+    - **ETL_CloudProcessing.py**: the python script for starting a cloud Spark cluster, extracting data from a cloud data lake directory, putting data in the Spark cluster for data processing, dumping after-processing data back to another directory in the cloud data lake, and terminating the Spark cluster. 
+    - **ETL_LocaltoCloudDataLake.py**: the python script for creating a directory in cloud data lake and uploading data from local directory
+    - **AWS_key**: a directory which contains the AWS_key file
 
 ------------
 #### HOW TO RUN THE PROJECT
-To run the project, you only need **etl.py**. Steps are listed below.
-1. Modify **dl.cfg** file. You need modify the content in [AWS CREDS]--to fill your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY. If you need any further helps, please check the AWS document. The link is below. https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
-
-2. Find the path of your **spark-submit** file. You can tyoe `which spark-submit` in your terminal to find the path. In my case, this file path is **/opt/conda/bin/spark-subnit**
-
-3. type `/opt/conda/bin/spark-subnit --master yarn ./etl.py` in your terminal to start the process of launching a Spark Cluster, getting data from Sparkify data lake (AWS S3), transforming data into a format which Sparkify analytical team wants, and load the result back to S3
-
-
+To run the project, You need to create an AWS account and get your AWS key / secret key. Then, execute **ETL_LocaltoCloudDataLake.py** and **ETL_CloudProcessing.py** python script in your local machine. That it. Enjoy it.
