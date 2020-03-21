@@ -1,7 +1,7 @@
 # import necessary packages
-import ConnectAWS_function
-import SSH_function
 import ETL_DataProcessbySpark
+import Function_ConnectAWS
+import Function_SSH
 
 
 def main():
@@ -32,7 +32,7 @@ def main():
     AWSSecretKey = AWS_encrypted_secret_key
 
     # creat a connection
-    AWS_connection = ConnectAWS()
+    AWS_connection = Function_ConnectAWS.ConnectAWS()
     
     # choose EMR service
     asession = AWS_connection.create_session(AWSAccessKeyId, AWSSecretKey)
@@ -45,13 +45,13 @@ def main():
     AWS_connection.return_EMR_status(EMR_session, EMR_cluster_name)
     
     # upload ETL_DataProcessbySpark.py to EMR cluster for following data processing
-    ssh = SSH_function()
+    ssh = Function_SSH.SSHtoEMRCluster()
     ssh_client = ssh.connect_server(EMR_ssh_key_file, EMR_master_dns, EMR_user_name)
     ssh.upload_file(ssh_client, uploaded_file_path, remote_path)
     ssh.close_connection(ssh_client)
     
     # ssh to cluster master node to rum spark submit command
-    ssh = SSH_function()
+    ssh = Function_SSH.SSHtoEMRCluster()
     ssh_client = ssh.connect_server(EMR_ssh_key_file, EMR_master_dns, EMR_user_name)
     ssh.execute_command('/bin/spark-submit --master yarn --deploy-mode cluster /ubuntu/dataprocessing/etl.py')
     ssh.close_connection(ssh_client)
