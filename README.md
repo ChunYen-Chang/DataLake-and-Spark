@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="750" height="300" src="https://github.com/ChunYen-Chang/DataLake-and-Spark/blob/master/images/logo.jpg">
+  <img width="750" height="300" src="https://github.com/ChunYen-Chang/Migrate-Local-Data-Storage-and-Process-to-AWS-Cloud/blob/master/images/logo.jpg">
 </p>
 
 # Migrate local data storage and process to AWS Cloud
@@ -10,12 +10,15 @@ Sparkify is a startup company which provides the music streaming app. Recently, 
 ###### *PROJECT DESCRIPTION*
 The analytics team in this company is interested in understanding their user activity on its music streaming app in order to provide better user experience for their user. However, due to the huge amount of incoming streaming user data, it is impossible to store all data in a on-premise data storage server. Also, the great amount of incoming streaming data also make conducting the data wrangling process in an on-premise stand-alone serve impossible. To overcome first problems, we decide to move the on-premise single data storage server to a cloud data lake (AWS S3) for accommodating the data. For second problem, we choose to launch a Spark cluster on AWS EMR and use this Spark cluster to tackle the data processing bottleneck problem. In sum, in this project, there are two goals. The first one is **moving local data to cloud data lake.** The second one is **using AWS EMR to do the data wrangling task by extracting data from S3, processing the data using Spark, and dumping the data back into S3 in a column-based data format to achieve storage-efficient.** 
 
+###### *SYSTEM ARCHITECTURE*
+<p align="center">
+  <img width="850" height="275" src="https://github.com/ChunYen-Chang/Migrate-Local-Data-Storage-and-Process-to-AWS-Cloud/blob/master/images/system_architecture.jpeg">
+</p>
+
 ###### *DETAILS AND DATA MODELING*
 In this project, it will create a manually ETL data pipeline. This data pipeline is based on Spark cluster, this Spark cluster extracts JSON data from AWS S3, transforms data into a format which fits the analytical team wants, and loads the result back into S3 in parquet format. The data modeling for this project is using star schema model. There are five tables--one fact table and four dimensional tables. The fact table is songplay, it includes information about songplay history. The dimension tables are user, song, artist, and time. User table includes the user's personal information. Song table includes the song's information. Time table includes when a song is played. The structure can be seen in the below picture.
 
-<p align="center">
-  <img src="https://github.com/ChunYen-Chang/DataLake-and-Spark/blob/master/images/data_modeling.jpg">
-</p>
+
 
 ------------
 #### FILES IN THE REPOSITORY
